@@ -1,0 +1,30 @@
+{
+  "name": "ed25519-supercop",
+  "version": "1.0.0",
+  "description": "supercop ",
+  "main": "index.js",
+  "dependencies": {
+    "nan": "2.0.5"
+  },
+  "scripts": {
+    "vendor": "git clone https://github.com/orlp/ed25519 vendor/ed25519",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/substack/ed25519-supercop.git"
+  },
+  "keywords": [
+    "ed25519",
+    "supercop",
+    "nightcracker",
+    "elliptic",
+    "curve"
+  ],
+  "author": "substack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/substack/ed25519-supercop/issues"
+  },
+  "homepage": "https://github.com/substack/ed25519-supercop#readme"
+}
