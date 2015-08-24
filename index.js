@@ -1,4 +1,4 @@
-var bindings = require('./build/Release/supercop')
+var bindings = require('./build/Release/supercop.node')
 
 exports.sign = function (message, publicKey, secretKey) {
   if (typeof message === 'string') message = Buffer(message)
