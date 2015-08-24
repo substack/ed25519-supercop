@@ -25,7 +25,7 @@ NAN_METHOD(SupercopSign) {
   }
   unsigned char *secretKey = (unsigned char*) Buffer::Data(info[2]);
 
-  unsigned char *signature;
+  unsigned char signature[64];
   ed25519_sign(signature, message, messageLen, publicKey, secretKey);
  
   Local<Object> signatureBuffer = Buffer::New((char *) signature, 64);
