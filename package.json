@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/substack/ed25519-supercop/issues"
   },
-  "homepage": "https://github.com/substack/ed25519-supercop#readme"
+  "homepage": "https://github.com/substack/ed25519-supercop#readme",
+  "devDependencies": {
+    "tape": "^4.2.0"
+  }
 }
