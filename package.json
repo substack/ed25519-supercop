@@ -9,6 +9,7 @@
   },
   "scripts": {
     "vendor": "git clone https://github.com/orlp/ed25519 vendor/ed25519",
+    "rebuild": "node-gyp rebuild",
     "test": "tape test/*.js"
   },
   "repository": {

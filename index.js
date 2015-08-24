@@ -31,3 +31,7 @@ exports.verify = function (signature, message, publicKey) {
   }
   return bindings.verify(signature, message, publicKey)
 }
+
+exports.createSeed = function () {
+  return bindings.createSeed()
+}

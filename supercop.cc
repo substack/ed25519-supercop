@@ -47,10 +47,19 @@ NAN_METHOD(Verify) {
   info.GetReturnValue().Set(result);
 }
 
+NAN_METHOD(CreateSeed) {
+  unsigned char seed[32];
+  ed25519_create_seed(seed);
+  Local<Object> seedBuffer = Buffer::New((char *) seed, 32);
+  info.GetReturnValue().Set(seedBuffer);
+}
+
 NAN_MODULE_INIT(InitAll) {
   Set(target, New<String>("sign").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(Sign)).ToLocalChecked());
   Set(target, New<String>("verify").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(Verify)).ToLocalChecked());
+  Set(target, New<String>("createSeed").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(CreateSeed)).ToLocalChecked());
 }
 NODE_MODULE(supercop, InitAll)
