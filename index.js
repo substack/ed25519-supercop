@@ -35,3 +35,11 @@ exports.verify = function (signature, message, publicKey) {
 exports.createSeed = function () {
   return bindings.createSeed()
 }
+
+exports.createKeyPair = function (seed) {
+  if (typeof seed === 'string') seed = Buffer(seed, 'hex')
+  else if (!Buffer.isBuffer(seed)) {
+    throw new Error('seed must be a buffer or hex string')
+  }
+  return bindings.createKeyPair(seed)
+}

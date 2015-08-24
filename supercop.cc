@@ -50,8 +50,24 @@ NAN_METHOD(Verify) {
 NAN_METHOD(CreateSeed) {
   unsigned char seed[32];
   ed25519_create_seed(seed);
-  Local<Object> seedBuffer = Buffer::New((char *) seed, 32);
-  info.GetReturnValue().Set(seedBuffer);
+  info.GetReturnValue().Set(Buffer::New((char *) seed, 32));
+}
+
+NAN_METHOD(CreateKeyPair) {
+  if (Buffer::Length(info[0]) != 32) {
+    return ThrowError("seed must be 32 bytes");
+  }
+  unsigned char *seed = (unsigned char*) Buffer::Data(info[0]);
+  unsigned char publicKey[32];
+  unsigned char secretKey[64];
+  ed25519_create_keypair(publicKey, secretKey, seed);
+
+  Local<Object> result = New<Object>();
+  Set(result, New<String>("publicKey").ToLocalChecked(),
+    Buffer::New((char *) publicKey, 32));
+  Set(result, New<String>("secretKey").ToLocalChecked(),
+    Buffer::New((char *) secretKey, 64));
+  info.GetReturnValue().Set(result);
 }
 
 NAN_MODULE_INIT(InitAll) {
@@ -61,5 +77,7 @@ NAN_MODULE_INIT(InitAll) {
     GetFunction(New<FunctionTemplate>(Verify)).ToLocalChecked());
   Set(target, New<String>("createSeed").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(CreateSeed)).ToLocalChecked());
+  Set(target, New<String>("createKeyPair").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(CreateKeyPair)).ToLocalChecked());
 }
 NODE_MODULE(supercop, InitAll)
