@@ -6,6 +6,10 @@ using namespace node;
 using namespace v8;
 using namespace Nan;
 
+inline Local<Object> NewBuf (unsigned char *buf, size_t len) {
+  return NewBuffer((char *) buf, len).ToLocalChecked();
+}
+
 NAN_METHOD(Sign) {
   unsigned char *message = (unsigned char*) Buffer::Data(info[0]);
   size_t messageLen = Buffer::Length(info[0]);
@@ -23,7 +27,7 @@ NAN_METHOD(Sign) {
   unsigned char signature[64];
   ed25519_sign(signature, message, messageLen, publicKey, secretKey);
  
-  Local<Object> signatureBuffer = Buffer::New((char *) signature, 64);
+  Local<Object> signatureBuffer = NewBuf(signature, 64);
   info.GetReturnValue().Set(signatureBuffer);
 }
 
@@ -48,7 +52,7 @@ NAN_METHOD(Verify) {
 NAN_METHOD(CreateSeed) {
   unsigned char seed[32];
   ed25519_create_seed(seed);
-  info.GetReturnValue().Set(Buffer::New((char *) seed, 32));
+  info.GetReturnValue().Set(NewBuf(seed, 32));
 }
 
 NAN_METHOD(CreateKeyPair) {
@@ -61,10 +65,8 @@ NAN_METHOD(CreateKeyPair) {
   ed25519_create_keypair(publicKey, secretKey, seed);
 
   Local<Object> result = New<Object>();
-  Set(result, New<String>("publicKey").ToLocalChecked(),
-    Buffer::New((char *) publicKey, 32));
-  Set(result, New<String>("secretKey").ToLocalChecked(),
-    Buffer::New((char *) secretKey, 64));
+  Set(result, New<String>("publicKey").ToLocalChecked(), NewBuf(publicKey, 32));
+  Set(result, New<String>("secretKey").ToLocalChecked(), NewBuf(secretKey, 64));
   info.GetReturnValue().Set(result);
 }
 
