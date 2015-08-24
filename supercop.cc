@@ -6,8 +6,8 @@ using namespace node;
 using namespace v8;
 using namespace Nan;
 
-inline Local<Object> NewBuf (unsigned char *buf, size_t len) {
-  return NewBuffer((char *) buf, len).ToLocalChecked();
+Local<Object> NewBuf (unsigned char *buf, size_t len) {
+  return CopyBuffer((char *) buf, len).ToLocalChecked();
 }
 
 NAN_METHOD(Sign) {
@@ -27,8 +27,7 @@ NAN_METHOD(Sign) {
   unsigned char signature[64];
   ed25519_sign(signature, message, messageLen, publicKey, secretKey);
  
-  Local<Object> signatureBuffer = NewBuf(signature, 64);
-  info.GetReturnValue().Set(signatureBuffer);
+  info.GetReturnValue().Set(NewBuf(signature, 64));
 }
 
 NAN_METHOD(Verify) {
