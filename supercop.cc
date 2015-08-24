@@ -1,8 +1,6 @@
 #include <nan.h>
 #include <node_buffer.h>
 #include "vendor/ed25519/src/ed25519.h"
-#include "vendor/ed25519/src/ge.h"
-#include "vendor/ed25519/src/sc.h"
 
 using namespace node;
 using namespace v8;
