@@ -43,11 +43,10 @@ NAN_METHOD(Verify) {
   unsigned char *message = (unsigned char*) Buffer::Data(messageBuffer);
   size_t messageLen = Buffer::Length(messageBuffer);
 
-  Local<Object> publicKeyBuffer = info[2]->ToObject();
-  if (Buffer::Length(publicKeyBuffer) != 32) {
+  if (Buffer::Length(info[2]) != 32) {
     return ThrowError("public key must be 32 bytes");
   }
-  unsigned char *publicKey = (unsigned char*) Buffer::Data(info[1]);
+  unsigned char *publicKey = (unsigned char*) Buffer::Data(info[2]);
 
   bool result = ed25519_verify(signature, message, messageLen, publicKey);
   info.GetReturnValue().Set(result);
