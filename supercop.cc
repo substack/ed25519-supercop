@@ -9,18 +9,15 @@ using namespace v8;
 using namespace Nan;
 
 NAN_METHOD(Sign) {
-  Local<Object> messageBuffer = info[0]->ToObject();
-  unsigned char *message = (unsigned char*) Buffer::Data(messageBuffer);
-  size_t messageLen = Buffer::Length(messageBuffer);
+  unsigned char *message = (unsigned char*) Buffer::Data(info[0]);
+  size_t messageLen = Buffer::Length(info[0]);
  
-  Local<Object> publicKeyBuffer = info[1]->ToObject();
-  if (Buffer::Length(publicKeyBuffer) != 32) {
+  if (Buffer::Length(info[1]) != 32) {
     return ThrowError("public key must be 32 bytes");
   }
   unsigned char *publicKey = (unsigned char*) Buffer::Data(info[1]);
  
-  Local<Object> secretKeyBuffer = info[2]->ToObject();
-  if (Buffer::Length(secretKeyBuffer) != 64) {
+  if (Buffer::Length(info[2]) != 64) {
     return ThrowError("secret key must be 64 bytes");
   }
   unsigned char *secretKey = (unsigned char*) Buffer::Data(info[2]);
@@ -33,15 +30,13 @@ NAN_METHOD(Sign) {
 }
 
 NAN_METHOD(Verify) {
-  Local<Object> signatureBuffer = info[0]->ToObject();
-  unsigned char *signature = (unsigned char*) Buffer::Data(signatureBuffer);
-  if (Buffer::Length(signatureBuffer) != 64) {
+  unsigned char *signature = (unsigned char*) Buffer::Data(info[0]);
+  if (Buffer::Length(info[0]) != 64) {
     return ThrowError("signature must be 64 bytes");
   }
 
-  Local<Object> messageBuffer = info[1]->ToObject();
-  unsigned char *message = (unsigned char*) Buffer::Data(messageBuffer);
-  size_t messageLen = Buffer::Length(messageBuffer);
+  unsigned char *message = (unsigned char*) Buffer::Data(info[1]);
+  size_t messageLen = Buffer::Length(info[1]);
 
   if (Buffer::Length(info[2]) != 32) {
     return ThrowError("public key must be 32 bytes");
