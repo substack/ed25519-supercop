@@ -2,6 +2,8 @@
 
 ed25519 curve operations using a supercop/ref10 implementation
 
+![travis-image](https://api.travis-ci.org/substack/ed25519-supercop.svg)
+
 This module provides C++ bindings for
 [orlp/ed25519](https://github.com/orlp/ed25519)
 (formerly [nightcracker/ed25519](https://github.com/nightcracker/ed25519)).
