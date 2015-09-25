@@ -64,19 +64,19 @@ NAN_METHOD(CreateKeyPair) {
   ed25519_create_keypair(publicKey, secretKey, seed);
 
   Local<Object> result = New<Object>();
-  Set(result, New<String>("publicKey").ToLocalChecked(), NewBuf(publicKey, 32));
-  Set(result, New<String>("secretKey").ToLocalChecked(), NewBuf(secretKey, 64));
+  Nan::Set(result, New<String>("publicKey").ToLocalChecked(), NewBuf(publicKey, 32));
+  Nan::Set(result, New<String>("secretKey").ToLocalChecked(), NewBuf(secretKey, 64));
   info.GetReturnValue().Set(result);
 }
 
 NAN_MODULE_INIT(InitAll) {
-  Set(target, New<String>("sign").ToLocalChecked(),
+  Nan::Set(target, New<String>("sign").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(Sign)).ToLocalChecked());
-  Set(target, New<String>("verify").ToLocalChecked(),
+  Nan::Set(target, New<String>("verify").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(Verify)).ToLocalChecked());
-  Set(target, New<String>("createSeed").ToLocalChecked(),
+  Nan::Set(target, New<String>("createSeed").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(CreateSeed)).ToLocalChecked());
-  Set(target, New<String>("createKeyPair").ToLocalChecked(),
+  Nan::Set(target, New<String>("createKeyPair").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(CreateKeyPair)).ToLocalChecked());
 }
 NODE_MODULE(supercop, InitAll)
