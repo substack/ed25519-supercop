@@ -15,6 +15,12 @@ bittorrent's
 [dht_store (bep44)](http://libtorrent.org/dht_store.html) extension uses
 supercop keys.
 
+# see also
+
+For a pure javascript emscripten implementation, see:
+
+* [supercop.js](https://github.com/1p6/supercop.js)
+
 # methods
 
 ``` js
