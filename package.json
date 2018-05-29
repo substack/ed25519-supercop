@@ -1,6 +1,6 @@
 {
   "name": "ed25519-supercop",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ed25519 curve operations using a supercop/ref10 implementation",
   "main": "index.js",
   "gypfile": true,
