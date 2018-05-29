@@ -21,6 +21,9 @@ before_deploy:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ARCH=ia32 npm run prebuild; fi
 - tar --create --verbose --file="$ARCHIVE_NAME" --directory "$TRAVIS_BUILD_DIR/prebuilds"
   .
+install:
+  - npm run vendor
+  - npm install
 deploy:
   provider: releases
   draft: false
