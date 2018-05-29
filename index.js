@@ -1,4 +1,4 @@
-var bindings = require('./build/Release/supercop.node')
+var bindings = require('node-gyp-build')(__dirname)
 
 exports.sign = function (message, publicKey, secretKey) {
   if (typeof message === 'string') message = Buffer(message)

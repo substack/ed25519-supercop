@@ -5,12 +5,15 @@
   "main": "index.js",
   "gypfile": true,
   "dependencies": {
-    "nan": "^2.0.5"
+    "nan": "^2.0.5",
+    "node-gyp-build": "^3.3.0"
   },
   "scripts": {
     "vendor": "git clone https://github.com/orlp/ed25519 vendor/ed25519",
     "rebuild": "node-gyp rebuild",
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "prebuild": "prebuildify -a --strip",
+    "install": "node-gyp-build"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
   },
   "homepage": "https://github.com/substack/ed25519-supercop#readme",
   "devDependencies": {
+    "prebuildify": "^2.6.1",
     "tape": "^4.2.0"
   }
 }
