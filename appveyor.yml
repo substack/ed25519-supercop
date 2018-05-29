@@ -5,6 +5,7 @@ skip_branch_with_pr: true
 environment:
   matrix:
     - nodejs_version: "Current"
+  APPVEYOR_REPO_TAG_NAME: "1.1.0"
 
 configuration: Release
 platform:
@@ -38,5 +39,4 @@ deploy:
     auth_token:
       secure: Rrnh1ZoAghC7oVlq46X4NNJFi5TKEjy/Z/9IsCKdAjEDPvz2RjeuFLQlHYJUAy60
     on:
-      appveyor_repo_tag: true
       nodejs_version: "Current"
