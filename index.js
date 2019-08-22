@@ -1,15 +1,15 @@
 var bindings = require('node-gyp-build')(__dirname)
 
 exports.sign = function (message, publicKey, secretKey) {
-  if (typeof message === 'string') message = Buffer(message)
+  if (typeof message === 'string') message = Buffer.from(message)
   else if (!Buffer.isBuffer(message)) {
     throw new Error('message must be a buffer or a string')
   }
-  if (typeof publicKey === 'string') publicKey = Buffer(publicKey, 'hex')
+  if (typeof publicKey === 'string') publicKey = Buffer.from(publicKey, 'hex')
   else if (!Buffer.isBuffer(publicKey)) {
     throw new Error('public key must be a buffer or hex string')
   }
-  if (typeof secretKey === 'string') secretKey = Buffer(secretKey, 'hex')
+  if (typeof secretKey === 'string') secretKey = Buffer.from(secretKey, 'hex')
   else if (!Buffer.isBuffer(secretKey)) {
     throw new Error('secret key must be a buffer or hex string')
   }
@@ -17,15 +17,15 @@ exports.sign = function (message, publicKey, secretKey) {
 }
 
 exports.verify = function (signature, message, publicKey) {
-  if (typeof signature === 'string') signature = Buffer(signature, 'hex')
+  if (typeof signature === 'string') signature = Buffer.from(signature, 'hex')
   else if (!Buffer.isBuffer(signature)) {
     throw new Error('message must be a buffer or a string')
   }
-  if (typeof message === 'string') message = Buffer(message)
+  if (typeof message === 'string') message = Buffer.from(message)
   else if (!Buffer.isBuffer(message)) {
     throw new Error('message must be a buffer or a string')
   }
-  if (typeof publicKey === 'string') publicKey = Buffer(publicKey, 'hex')
+  if (typeof publicKey === 'string') publicKey = Buffer.from(publicKey, 'hex')
   else if (!Buffer.isBuffer(publicKey)) {
     throw new Error('public key must be a buffer or hex string')
   }
@@ -37,7 +37,7 @@ exports.createSeed = function () {
 }
 
 exports.createKeyPair = function (seed) {
-  if (typeof seed === 'string') seed = Buffer(seed, 'hex')
+  if (typeof seed === 'string') seed = Buffer.from(seed, 'hex')
   else if (!Buffer.isBuffer(seed)) {
     throw new Error('seed must be a buffer or hex string')
   }
@@ -45,11 +45,11 @@ exports.createKeyPair = function (seed) {
 }
 
 exports.exchangeKeys = function (publicKey, secretKey) {
-  if (typeof publicKey === 'string') publicKey = Buffer(publicKey, 'hex')
+  if (typeof publicKey === 'string') publicKey = Buffer.from(publicKey, 'hex')
   else if (!Buffer.isBuffer(publicKey)) {
     throw new Error('public key must be a buffer or hex string')
   }
-  if (typeof secretKey === 'string') secretKey = Buffer(secretKey, 'hex')
+  if (typeof secretKey === 'string') secretKey = Buffer.from(secretKey, 'hex')
   else if (!Buffer.isBuffer(secretKey)) {
     throw new Error('secret key must be a buffer or hex string')
   }
