@@ -43,3 +43,15 @@ exports.createKeyPair = function (seed) {
   }
   return bindings.createKeyPair(seed)
 }
+
+exports.exchangeKeys = function (publicKey, secretKey) {
+  if (typeof publicKey === 'string') publicKey = Buffer(publicKey, 'hex')
+  else if (!Buffer.isBuffer(publicKey)) {
+    throw new Error('public key must be a buffer or hex string')
+  }
+  if (typeof secretKey === 'string') secretKey = Buffer(secretKey, 'hex')
+  else if (!Buffer.isBuffer(secretKey)) {
+    throw new Error('secret key must be a buffer or hex string')
+  }
+  return bindings.exchangeKeys(publicKey, secretKey)
+}

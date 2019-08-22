@@ -69,6 +69,23 @@ NAN_METHOD(CreateKeyPair) {
   info.GetReturnValue().Set(result);
 }
 
+NAN_METHOD(ExchangeKeys) {
+  if (Buffer::Length(info[0]) != 32) {
+    return ThrowError("public key must be 32 bytes");
+  }
+  unsigned char *publicKey = (unsigned char*) Buffer::Data(info[0]);
+ 
+  if (Buffer::Length(info[1]) != 64) {
+    return ThrowError("secret key must be 64 bytes");
+  }
+  unsigned char *secretKey = (unsigned char*) Buffer::Data(info[1]);
+
+  unsigned char shared_secret[32];
+  ed25519_key_exchange(shared_secret, publicKey, secretKey);
+
+  info.GetReturnValue().Set(NewBuf(shared_secret, 32));
+}
+
 NAN_MODULE_INIT(InitAll) {
   Nan::Set(target, New<String>("sign").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(Sign)).ToLocalChecked());
@@ -78,5 +95,7 @@ NAN_MODULE_INIT(InitAll) {
     GetFunction(New<FunctionTemplate>(CreateSeed)).ToLocalChecked());
   Nan::Set(target, New<String>("createKeyPair").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(CreateKeyPair)).ToLocalChecked());
+  Nan::Set(target, New<String>("exchangeKeys").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(ExchangeKeys)).ToLocalChecked());
 }
 NODE_MODULE(supercop, InitAll)
