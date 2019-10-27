@@ -51,6 +51,14 @@ Generate a 64-byte `signature` given:
 Return a boolean `ok`, true if the 64-byte buffer or hex string `signature`
 signs a buffer or string `message` with the 32-byte or hex string `publicKey`.
 
+## var shared_secret = ed.exchangeKeys(publicKey, secretKey)
+
+Generate a shared secret using Diffie–Hellman on the montgomery curve.
+
+* `publicKey` (32-byte buffer or hex string)
+* `secretKey` (64-byte buffer or hex string)
+
+
 # install
 
 ```
