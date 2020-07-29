@@ -9,9 +9,9 @@ test('sign and verify', function (t) {
   var msg = 'whatever'
   var sig = ed.sign(msg, pk, sk)
   var xsig = xmod(sig)
-  var xmsg = xmod(Buffer(msg))
-  var xpk = xmod(Buffer(pk, 'hex'))
- 
+  var xmsg = xmod(Buffer.from(msg))
+  var xpk = xmod(Buffer.from(pk, 'hex'))
+
   t.ok(ed.verify(sig, msg, pk))
   t.notOk(ed.verify(xsig, msg, pk))
   t.notOk(ed.verify(sig, xmsg, pk))
@@ -19,7 +19,7 @@ test('sign and verify', function (t) {
 })
 
 function xmod (buf) {
-  var cp = Buffer(buf)
+  var cp = Buffer.from(buf)
   cp[0] = ~cp[0]
   return cp
 }

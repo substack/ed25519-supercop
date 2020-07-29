@@ -8,13 +8,13 @@ test('generate, sign, and verify', function (t) {
   var kp = ed.createKeyPair(seed)
   t.equal(kp.publicKey.length, 32)
   t.equal(kp.secretKey.length, 64)
- 
+
   var msg = 'whatever'
   var sig = ed.sign(msg, kp.publicKey, kp.secretKey)
   var xsig = xmod(sig)
   var xmsg = xmod(msg)
   var xpk = xmod(kp.publicKey)
- 
+
   t.ok(ed.verify(sig, msg, kp.publicKey))
   t.notOk(ed.verify(xsig, msg, kp.publicKey))
   t.notOk(ed.verify(sig, xmsg, kp.publicKey))
@@ -22,7 +22,7 @@ test('generate, sign, and verify', function (t) {
 })
 
 function xmod (buf) {
-  var cp = Buffer(buf)
+  var cp = Buffer.from(buf)
   cp[0] = ~cp[0]
   return cp
 }
