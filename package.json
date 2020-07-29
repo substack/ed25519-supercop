@@ -5,14 +5,14 @@
   "main": "index.js",
   "gypfile": true,
   "dependencies": {
-    "nan": "^2.0.5",
+    "napi-macros": "^2.0.0",
     "node-gyp-build": "^4.2.3"
   },
   "scripts": {
     "vendor": "git clone https://github.com/orlp/ed25519 vendor/ed25519",
     "rebuild": "node-gyp rebuild",
     "test": "tape test/*.js",
-    "prebuild": "prebuildify -a --strip",
+    "prebuild": "prebuildify --napi --strip",
     "install": "node-gyp-build"
   },
   "repository": {

@@ -15,7 +15,7 @@
         "vendor/ed25519/src/sign.c",
         "vendor/ed25519/src/verify.c"
       ],
-      "include_dirs": ["<!(node -e \"require('nan')\")"]
+      "include_dirs": ["<!(node -e \"require('napi-macros')\")"]
     }
   ]
 }
